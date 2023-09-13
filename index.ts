@@ -1,5 +1,5 @@
 import { abstractFactory, builder, concreteFactory, factory, prototype, singleton } from "./creationalPatterns/index"
-import { adapter } from "./structuralPatterns";
+import { adapter, bridge, composite, decorator, facade, flyweight, proxy } from "./structuralPatterns";
 
 /*
     CREATIONAL PATTERNS EXAMPLES
@@ -15,3 +15,9 @@ singleton();
     STRUCTURAL PATTERNS EXAMPLES
 */
 adapter();
+bridge();
+composite();
+decorator();
+facade();
+flyweight();
+proxy();
