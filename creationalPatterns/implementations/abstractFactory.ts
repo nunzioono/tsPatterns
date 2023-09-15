@@ -1,107 +1,42 @@
-interface Chair {
-    doSomething();
+interface Product {
+    doSomething(): string;
 }
 
-interface Sofa {
-    doSomething();
+class Boat implements Product {
+    name: string
+
+    constructor(n: string) {
+        this.name = n;
+    }
+
+    doSomething(): string {
+        return "I'm a brand new boat and my name is: "+this.name;
+    }
+
 }
 
-interface Table {
-    doSomething();
+class Truck implements Product {
+    name: string
+
+    constructor(n: string) {
+        this.name = n;
+    }
+    doSomething(): string {
+        return "I'm a brand new truck and my name is: "+this.name;
+    }
+
 }
 
-class VictorianChair implements Chair {
-    doSomething() {
-        
-    }
+interface Factory {
+    createBoat(name: string): Boat;
+    createTruck(name: string): Truck;
 }
 
-class ModernChair implements Chair {
-    doSomething() {
-        
+export class FurnitureFactory implements Factory {
+    createBoat(name: string) {
+        return new Boat(name);
     }
-}
-
-class DecoChair implements Chair {
-    doSomething() {
-        
-    }
-}
-
-class VictorianSofa implements Sofa {
-    doSomething() {
-        
-    }
-}
-
-class ModernSofa implements Sofa {
-    doSomething() {
-        
-    }
-}
-
-class DecoSofa implements Sofa {
-    doSomething() {
-        
-    }
-}
-
-class VictorianTable implements Table {
-    doSomething() {
-        
-    }
-}
-
-class ModernTable implements Table {
-    doSomething() {
-        
-    }
-}
-
-class DecoTable implements Table {
-    doSomething() {
-        
-    }
-}
-
-interface FurnitureFactory {
-    createChair(): Chair;
-    createSofa(): Sofa;
-    createTable(): Table;
-}
-
-export class VictorianFactory implements FurnitureFactory {
-    createChair(): Chair {
-        return new VictorianChair();
-    }
-    createSofa(): Sofa {
-        return new VictorianSofa();
-    }
-    createTable(): Table {
-        return new VictorianTable();
-    }
-}
-
-export class ModernFactory implements FurnitureFactory {
-    createChair(): Chair {
-        return new ModernChair();
-    }
-    createSofa(): Sofa {
-        return new ModernSofa();
-    }
-    createTable(): Table {
-        return new ModernTable();
-    }
-}
-
-export class DecoFactory implements FurnitureFactory {
-    createChair(): Chair {
-        return new DecoChair();
-    }
-    createSofa(): Sofa {
-        return new DecoSofa();
-    }
-    createTable(): Table {
-        return new DecoTable();
+    createTruck(name: string) {
+        return new Truck(name);
     }
 }

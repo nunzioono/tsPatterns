@@ -1,6 +1,6 @@
-import { Truck, Boat } from "./implementations/factory";
-import { concreteTruckCreator, concreteBoatCreator } from "./implementations/concreteFactory";
-import { VictorianFactory, ModernFactory, DecoFactory } from "./implementations/abstractFactory";
+import { Trasportation } from "./implementations/factory";
+import { Transport } from "./implementations/concreteFactory";
+import { FurnitureFactory } from "./implementations/abstractFactory";
 import { HouseBuilder, CarBuilder, Director } from "./implementations/builder";
 import { Product } from "./implementations/prototype";
 import { Singleton } from "./implementations/singleton";
@@ -10,6 +10,38 @@ import { Singleton } from "./implementations/singleton";
     FACTORY PATTERN
 */
 export function factory() {
+    class Truck implements Trasportation {
+        tag: string;
+    
+        constructor(myTag: string) {
+            if(myTag) this.tag='t'+myTag;
+        }
+    
+        planDelivery() {
+            
+        }
+    
+        printTag() {
+            console.log(this.tag)
+        }
+    }
+    
+    class Boat implements Trasportation {
+        tag: string;
+        
+        constructor(myTag: string) {
+            if(myTag) this.tag='b'+myTag;
+        }
+    
+        planDelivery() {
+            
+        }
+    
+        printTag() {
+            console.log(this.tag)
+        }
+    }
+
     const myTruck = new Truck('280181');
     myTruck.printTag();
     const myBoat = new Boat('280181');
@@ -20,6 +52,62 @@ export function factory() {
     CONCRETE FACTORY
 */
 export function concreteFactory() {
+    class Truck extends Transport {
+        tag: string;
+    
+        constructor(myTag: string) {
+            super();
+            if(myTag) this.tag='t'+myTag;
+        }
+    
+        planDelivery() {
+            
+        }
+    
+        printTag() {
+            console.log(this.tag)
+        }
+    }
+    
+    class Boat extends Transport {
+        tag: string;
+        
+        constructor(myTag: string) {
+            super();
+            if(myTag) this.tag='b'+myTag;
+        }
+    
+        planDelivery() {
+            
+        }
+    
+        printTag() {
+            console.log(this.tag)
+        }
+    }
+    
+    abstract class Creator {
+    
+        public abstract factoryMethod(tag: string): Transport;
+    
+    }
+
+    class concreteTruckCreator extends Creator {
+
+        public factoryMethod(tag: string): Truck {
+            return new Truck(tag);
+        }
+    
+    }
+    
+    class concreteBoatCreator extends Creator {
+    
+        public factoryMethod(tag: string): Boat {
+            return new Boat(tag);
+        }
+    
+    }
+
     const truckCreator = new concreteTruckCreator();
     const boatCreator = new concreteBoatCreator();
     const myTruck = truckCreator.factoryMethod("280181");
@@ -33,28 +121,9 @@ export function concreteFactory() {
     ABSTRACT FACTORY
 */
 export function abstractFactory() {
-    const myVictorianFactory = new VictorianFactory();
-    const myModernFactory = new ModernFactory();
-    const myDecoFactory = new DecoFactory();
-    const chair = myVictorianFactory.createChair();
-    const sofa = myVictorianFactory.createSofa();
-    const table = myVictorianFactory.createTable();
-    const chair2 = myModernFactory.createChair();
-    const sofa2= myModernFactory.createSofa();
-    const table2 = myModernFactory.createTable();
-    const chair3 = myDecoFactory.createChair();
-    const sofa3 = myDecoFactory.createSofa();
-    const table3 = myDecoFactory.createTable();
-    
-    console.log(chair.constructor.name)
-    console.log(sofa.constructor.name)
-    console.log(table.constructor.name)
-    console.log(chair2.constructor.name)
-    console.log(sofa2.constructor.name)
-    console.log(table2.constructor.name)
-    console.log(chair3.constructor.name)
-    console.log(sofa3.constructor.name)
-    console.log(table3.constructor.name)    
+    const factory = new FurnitureFactory();
+    const boat = factory.createBoat("280181");
+    const truck = factory.createTruck("280181"); 
 }
 
 /*
